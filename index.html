@@ -2,110 +2,194 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Review Finder | Search Movies & Ratings</title>
-    <meta name="description"
-        content="Search for movies and discover ratings, plots, and reviews from OMDb's extensive database.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search for movies and discover ratings, plots, and reviews from OMDb's extensive database.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#111827">
+
+  <title>Movie Review Finder | Search Movies & Ratings</title>
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Corrected Google Fonts links -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="logo">
-                <span class="logo-icon">🎬</span>
-                Movie Review Finder
-            </h1>
-            <p class="tagline">Click any poster to view full details</p>
-        </header>
 
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="Search for a movie..."
-                    autocomplete="off">
-                <button id="searchButton" class="search-button">
-                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="M21 21l-4.35-4.35"></path>
-                    </svg>
-                    Search
-                </button>
-            </div>
-        </section>
+  <noscript>
+    <div style="text-align:center;padding:20px;background:#ffefc5;color:#333;">
+      This application requires JavaScript to search movies.
+    </div>
+  </noscript>
 
-        <!-- Loading Spinner -->
-        <div id="loader" class="loader hidden">
-            <div class="spinner"></div>
-            <p>Searching movies...</p>
-        </div>
+  <main class="app-container">
 
-        <!-- Error Message -->
-        <div id="errorMessage" class="error-message hidden">
-            <span class="error-icon">⚠️</span>
-            <p id="errorText">An error occurred</p>
-        </div>
+    <header class="header">
+      <h1 class="logo">
+        <span class="logo-icon" aria-hidden="true">🎬</span>
+        Movie Review Finder
+      </h1>
+      <p class="tagline">Click any poster to view full details</p>
+    </header>
 
-        <!-- Results Grid -->
-        <section id="resultsSection" class="results-section hidden">
-            <h2 class="results-title">Search Results</h2>
-            <div id="resultsGrid" class="results-grid"></div>
-        </section>
+    <section class="search-section">
+      <div class="search-container">
 
-        <!-- Empty State -->
-        <div id="emptyState" class="empty-state">
-            <div class="empty-icon">🎥</div>
-            <h2>Start Your Search</h2>
-            <p>Enter a movie title above to discover ratings and reviews</p>
-        </div>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search for a movie..."
+          autocomplete="off"
+          spellcheck="false"
+          enterkeyhint="search"
+          aria-label="Search for a movie">
+
+        <button
+          id="searchButton"
+          class="search-button"
+          type="button">
+
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+
+          Search
+        </button>
+
+      </div>
+    </section>
+
+    <div
+      id="loader"
+      class="loader hidden"
+      role="status"
+      aria-live="polite">
+      <div class="spinner"></div>
+      <p>Searching movies...</p>
     </div>
 
-    <!-- Movie Details Modal -->
-    <div id="movieModal" class="modal hidden">
-        <div class="modal-overlay" id="modalOverlay"></div>
-        <div class="modal-content">
-            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+    <div
+      id="errorMessage"
+      class="error-message hidden"
+      role="alert"
+      aria-live="assertive">
+      <span class="error-icon">⚠️</span>
+      <p id="errorText">An error occurred.</p>
+    </div>
 
-            <div class="modal-body">
-                <div class="modal-poster">
-                    <img id="modalPoster" src="" alt="Movie poster">
-                </div>
-                <div class="modal-info">
-                    <h2 id="modalTitle" class="modal-title"></h2>
-                    <div class="modal-meta">
-                        <span id="modalYear" class="modal-year"></span>
-                        <span id="modalRated" class="modal-rated"></span>
-                        <span id="modalRuntime" class="modal-runtime"></span>
-                    </div>
-                    <div id="modalRating" class="modal-rating"></div>
-                    <div id="modalGenre" class="modal-genre"></div>
-                    <div class="modal-section">
-                        <h3>Plot</h3>
-                        <p id="modalPlot" class="modal-plot"></p>
-                    </div>
-                    <div class="modal-section">
-                        <h3>Cast & Crew</h3>
-                        <p id="modalDirector" class="modal-crew"></p>
-                        <p id="modalActors" class="modal-crew"></p>
-                    </div>
-                </div>
-            </div>
+    <section
+      id="resultsSection"
+      class="results-section hidden">
+
+      <h2 class="results-title">Search Results</h2>
+
+      <div
+        id="resultsGrid"
+        class="results-grid"
+        aria-live="polite">
+      </div>
+
+    </section>
+
+    <section id="emptyState" class="empty-state">
+      <div class="empty-icon">🎥</div>
+      <h2>Start Your Search</h2>
+      <p>Enter a movie title above to discover ratings and reviews.</p>
+    </section>
+
+  </main>
+
+  <div
+    id="movieModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle">
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-content">
+
+      <button
+        id="modalClose"
+        class="modal-close"
+        type="button"
+        aria-label="Close movie details">
+        ×
+      </button>
+
+      <div class="modal-body">
+
+        <div class="modal-poster">
+          <img
+            id="modalPoster"
+            src=""
+            alt="Movie poster"
+            loading="lazy"
+            decoding="async">
         </div>
+
+        <div class="modal-info">
+
+          <h2 id="modalTitle" class="modal-title"></h2>
+
+          <div class="modal-meta">
+            <span id="modalYear" class="modal-year"></span>
+            <span id="modalRated" class="modal-rated"></span>
+            <span id="modalRuntime" class="modal-runtime"></span>
+          </div>
+
+          <div id="modalRating" class="modal-rating"></div>
+          <div id="modalGenre" class="modal-genre"></div>
+
+          <section class="modal-section">
+            <h3>Plot</h3>
+            <p id="modalPlot" class="modal-plot"></p>
+          </section>
+
+          <section class="modal-section">
+            <h3>Cast & Crew</h3>
+            <p id="modalDirector" class="modal-crew"></p>
+            <p id="modalActors" class="modal-crew"></p>
+          </section>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- Modal Loading -->
-    <div id="modalLoader" class="modal-loader hidden">
-        <div class="spinner"></div>
-        <p>Loading details...</p>
-    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <div
+    id="modalLoader"
+    class="modal-loader hidden"
+    role="status"
+    aria-live="polite">
+    <div class="spinner"></div>
+    <p>Loading details...</p>
+  </div>
+
+  <script src="script.js"></script>
+
 </body>
 
 </html>
