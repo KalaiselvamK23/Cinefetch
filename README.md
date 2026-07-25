@@ -29,11 +29,11 @@ https://cinefetch.netlify.app/
 
 ### 🔍 Search Results
 
-![Search Results](assets/screenshots/results.png)
+![Search Results](assets/screenshots/search-result.png)
 
 ### 🎬 Movie Details
 
-![Movie Details](assets/screenshots/modal.png)
+![Movie Details](assets/screenshots/movie-details.png)
 
 ---
 
