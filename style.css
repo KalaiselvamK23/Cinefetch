@@ -150,22 +150,24 @@ body {
 }
 
 .loader {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     padding: 30px;
+    text-align: center;
     color: var(--muted);
 }
 
 .spinner {
     width: 45px;
     height: 45px;
-
     border: 4px solid rgba(255, 255, 255, 0.2);
     border-top-color: var(--accent);
-
     border-radius: 50%;
     animation: spin 1s linear infinite;
-
-    margin: auto;
+    margin-bottom: 12px;
 }
 
 .error-message {
