@@ -1,12 +1,9 @@
-# 🎬 Movie Review Finder
+# 🎬 Cinefetch
 
-![GitHub repo size](https://img.shields.io/github/repo-size/KalaiselvamK23/Cinefetch)
-
-![GitHub stars](https://img.shields.io/github/stars/KalaiselvamK23/Cinefetch)
-
-![GitHub license](https://img.shields.io/github/license/KalaiselvamK23/Cinefetch)
-
-![GitHub issues](https://img.shields.io/github/issues/KalaiselvamK23/Cinefetch)
+[![GitHub license](https://img.shields.io/github/license/KalaiselvamK23/Cinefetch)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/KalaiselvamK23/Cinefetch)](https://github.com/KalaiselvamK23/Cinefetch/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/KalaiselvamK23/Cinefetch)](https://github.com/KalaiselvamK23/Cinefetch/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/KalaiselvamK23/Cinefetch)](https://github.com/KalaiselvamK23/Cinefetch)
 
 A modern movie search application that allows users to discover movie information, ratings, plots, cast details, and reviews using the OMDb API.
 
