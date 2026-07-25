@@ -1,11 +1,11 @@
 # 🎬 Cinefetch
 
 [![GitHub license](https://img.shields.io/github/license/KalaiselvamK23/Cinefetch)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/KalaiselvamK23/Cinefetch)](https://github.com/KalaiselvamK23/Cinefetch/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/KalaiselvamK23/Cinefetch?style=flat)](https://github.com/KalaiselvamK23/Cinefetch/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/KalaiselvamK23/Cinefetch)](https://github.com/KalaiselvamK23/Cinefetch/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/KalaiselvamK23/Cinefetch)](https://github.com/KalaiselvamK23/Cinefetch)
 
-A modern movie search application that allows users to discover movie information, ratings, plots, cast details, and reviews using the OMDb API.
+Cinefetch is a modern movie search application that allows users to discover movie information, ratings, plots, cast details, and reviews using the OMDb API.
 
 The project features a frosted glassmorphism user interface with responsive design, smooth animations, and an interactive movie details modal.
 
@@ -110,7 +110,7 @@ https://cinefetch.netlify.app/
 # 📂 Project Structure
 
 ```
-Movie-Review-Finder/
+Cinefetch/
 
 ├── index.html
 │
@@ -151,13 +151,13 @@ Movie-Review-Finder/
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/Movie-Review-Finder.git
+git clone https://github.com/your-username/Cinefetch.git
 ```
 
 ## 2. Navigate into the project folder
 
 ```bash
-cd Movie-Review-Finder
+cd Cinefetch
 ```
 
 ## 3. Get an OMDb API Key
