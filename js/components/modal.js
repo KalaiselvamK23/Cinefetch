@@ -15,98 +15,85 @@ const modalDirector = document.getElementById("modalDirector");
 const modalActors = document.getElementById("modalActors");
 
 // Open Movie Details
-
 async function openMovieDetails(imdbID) {
-try {
-modalLoader.classList.remove("hidden");
-modal.classList.remove("hidden");
+  try {
+    modalLoader.classList.remove("hidden");
+    modal.classList.remove("hidden");
 
-```
-const movie = await getMovieDetails(imdbID);
+    const movie = await getMovieDetails(imdbID);
 
-if (movie.Response === "False") {
-  throw new Error(movie.Error || "Unable to load movie details.");
-}
+    if (movie.Response === "False") {
+      throw new Error(movie.Error || "Unable to load movie details.");
+    }
 
-displayMovieDetails(movie);
-```
+    displayMovieDetails(movie);
+  } catch (error) {
+    console.error("Movie details error:", error);
 
-} catch (error) {
-console.error("Movie details error:", error);
+    modal.classList.add("hidden");
 
-```
-modal.classList.add("hidden");
-
-showError(
-  error.message || "Unable to load movie details."
-);
-```
-
-} finally {
-modalLoader.classList.add("hidden");
-}
+    showError(error.message || "Unable to load movie details.");
+  } finally {
+    modalLoader.classList.add("hidden");
+  }
 }
 
 // Display Movie Details
-
 function displayMovieDetails(movie) {
+  modalPoster.src =
+    movie.Poster && movie.Poster !== "N/A"
+      ? movie.Poster
+      : "assets/images/no-poster.png";
 
-modalPoster.src =
-movie.Poster && movie.Poster !== "N/A"
-? movie.Poster
-: "assets/images/no-poster.png";
+  modalPoster.alt = `${movie.Title || "Movie"} poster`;
 
-modalPoster.alt = `${movie.Title} poster`;
+  modalTitle.textContent = movie.Title || "Unknown Title";
+  modalYear.textContent = movie.Year || "";
 
-modalTitle.textContent = movie.Title || "Unknown Title";
-modalYear.textContent = movie.Year || "";
-modalRated.textContent = movie.Rated || "";
-modalRuntime.textContent = movie.Runtime || "";
+  modalRated.textContent =
+    movie.Rated && movie.Rated !== "N/A" ? movie.Rated : "";
 
-modalRating.textContent =
-movie.imdbRating && movie.imdbRating !== "N/A"
-? `⭐ IMDb: ${movie.imdbRating}/10`
-: "";
+  modalRuntime.textContent =
+    movie.Runtime && movie.Runtime !== "N/A" ? movie.Runtime : "";
 
-modalGenre.textContent =
-movie.Genre && movie.Genre !== "N/A"
-? movie.Genre
-: "";
+  modalRating.textContent =
+    movie.imdbRating && movie.imdbRating !== "N/A"
+      ? `⭐ IMDb: ${movie.imdbRating}/10`
+      : "";
 
-modalPlot.textContent =
-movie.Plot && movie.Plot !== "N/A"
-? movie.Plot
-: "Plot information not available.";
+  modalGenre.textContent =
+    movie.Genre && movie.Genre !== "N/A" ? movie.Genre : "";
 
-modalDirector.textContent =
-movie.Director && movie.Director !== "N/A"
-? `Director: ${movie.Director}`
-: "";
+  modalPlot.textContent =
+    movie.Plot && movie.Plot !== "N/A"
+      ? movie.Plot
+      : "Plot information not available.";
 
-modalActors.textContent =
-movie.Actors && movie.Actors !== "N/A"
-? `Cast: ${movie.Actors}`
-: "";
+  modalDirector.textContent =
+    movie.Director && movie.Director !== "N/A"
+      ? `Director: ${movie.Director}`
+      : "";
+
+  modalActors.textContent =
+    movie.Actors && movie.Actors !== "N/A"
+      ? `Cast: ${movie.Actors}`
+      : "";
 }
 
 // Close Modal
-
 function closeModal() {
-modal.classList.add("hidden");
+  modal.classList.add("hidden");
 }
 
 // Close Button
-
 modalClose.addEventListener("click", closeModal);
 
 // Overlay Click
-
 modalOverlay.addEventListener("click", closeModal);
 
 // Escape Key
-
 document.addEventListener("keydown", (event) => {
-if (event.key === "Escape" && !modal.classList.contains("hidden")) {
-closeModal();
-}
+  if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+    closeModal();
+  }
 });

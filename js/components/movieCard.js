@@ -1,3 +1,9 @@
+function escapeHtml(value) {
+  const div = document.createElement("div");
+  div.textContent = value ?? "";
+  return div.innerHTML;
+}
+
 function createMovieCard(movie, index, openMovieDetails) {
   const card = document.createElement("div");
 
@@ -8,45 +14,37 @@ function createMovieCard(movie, index, openMovieDetails) {
 
   if (hasPoster) {
     card.innerHTML = `
-            <img 
-                src="${movie.Poster}" 
-                alt="${escapeHtml(movie.Title)} poster"
-                loading="lazy"
-                onerror="this.src='assets/images/no-poster.png'"
-            >
-
-            <div class="movie-card-overlay">
-                <div class="movie-card-title">
-                    ${escapeHtml(movie.Title)}
-                </div>
-
-                <div class="movie-card-year">
-                    ${movie.Year}
-                </div>
-            </div>
-        `;
+      <img 
+        src="${movie.Poster}" 
+        alt="${escapeHtml(movie.Title)} poster"
+        loading="lazy"
+        onerror="this.src='assets/images/no-poster.png'"
+      >
+      <div class="movie-card-overlay">
+        <div class="movie-card-title">
+          ${escapeHtml(movie.Title)}
+        </div>
+        <div class="movie-card-year">
+          ${escapeHtml(movie.Year)}
+        </div>
+      </div>
+    `;
   } else {
     card.innerHTML = `
-            <div class="movie-card-no-poster">
-                🎬
-            </div>
-
-            <div class="movie-card-overlay" style="opacity:1;">
-                <div class="movie-card-title">
-                    ${escapeHtml(movie.Title)}
-                </div>
-
-                <div class="movie-card-year">
-                    ${movie.Year}
-                </div>
-            </div>
-        `;
+      <div class="movie-card-no-poster"> 🎬 </div>
+      <div class="movie-card-overlay" style="opacity:1;">
+        <div class="movie-card-title">
+          ${escapeHtml(movie.Title)}
+        </div>
+        <div class="movie-card-year">
+          ${escapeHtml(movie.Year)}
+        </div>
+      </div>
+    `;
   }
 
   card.tabIndex = 0;
-
   card.setAttribute("role", "button");
-
   card.setAttribute("aria-label", `View details for ${movie.Title}`);
 
   card.addEventListener("click", () => {
@@ -55,6 +53,7 @@ function createMovieCard(movie, index, openMovieDetails) {
 
   card.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
       openMovieDetails(movie.imdbID);
     }
   });
